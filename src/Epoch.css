@@ -1,0 +1,14 @@
+.Epoch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Epoch-label {
+    text-align: right;
+    padding: 0 10px;
+}
+
+.Epoch-value {
+    text-align: left;
+    padding: 0 10px;
+}
