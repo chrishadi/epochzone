@@ -1,6 +1,7 @@
 .Epoch {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 24px;
+    align-items: center;
 }
 
 .Epoch-label {

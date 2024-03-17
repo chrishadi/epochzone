@@ -1,3 +1,7 @@
+.EpochConverter {
+    padding: 1em;
+}
+
 .EpochPanel {
     display: flex;
     flex-direction: column;
