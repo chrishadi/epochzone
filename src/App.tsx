@@ -1,4 +1,3 @@
-import NanoDate from './NanoDate';
 import logo from './logo.svg';
 import './App.css';
 import EpochConverter from './EpochConverter';
@@ -12,8 +11,6 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const date = new NanoDate();
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
