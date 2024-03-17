@@ -1,0 +1,16 @@
+.EpochPanel {
+    display: flex;
+    flex-direction: column;
+}
+
+.EpochForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.EpochUnit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
