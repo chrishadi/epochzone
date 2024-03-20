@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, SyntheticEvent, useState } from "react";
 import { Button, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { DateTimeValidationError, LocalizationProvider, PickerChangeHandlerContext } from "@mui/x-date-pickers";
@@ -30,7 +30,9 @@ function EpochConverter() {
         }
     }
 
-    const setDateFromInput = () => {
+    const setDateFromTick = (evt: SyntheticEvent) => {
+        evt.preventDefault()
+
         if (!inputText) {
             return
         }
@@ -67,19 +69,21 @@ function EpochConverter() {
             </LocalizationProvider>
             <Epoch date={date}></Epoch>
             <div className='EpochPanel'>
-                <div className='EpochForm'>
+                <form className='EpochForm' onSubmit={setDateFromTick}>
                     <TextField
                         className='EpochForm-input'
                         type='number'
+                        name='tick'
                         value={inputText}
                         onChange={(evt: ChangeEvent<HTMLInputElement>) => { setInputText(evt.target.value) }}
                     ></TextField>
                     <Button
                         className='EpochForm-button'
+                        type='submit'
                         variant='contained'
                         onClick={setDateFromInput}
                     >Apply</Button>
-                </div>
+                </form>
                 <div className='EpochUnit'>
                     <ToggleButtonGroup
                         color='primary'
