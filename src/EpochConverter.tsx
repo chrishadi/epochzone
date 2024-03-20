@@ -1,6 +1,9 @@
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Button, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import DateTime from "./DateTime";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DateTimeValidationError, LocalizationProvider, PickerChangeHandlerContext } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Epoch from "./Epoch";
 import NanoDate from "./NanoDate";
 import { convertToEpochMilli } from "./conversion";
@@ -18,6 +21,25 @@ function EpochConverter() {
     const [unit, setUnit] = useState('second')
     const [inputText, setInputText] = useState(date.getUnixSecond().toString())
 
+    const onDateTimePickerChange = (
+        val: dayjs.Dayjs | null,
+        context: PickerChangeHandlerContext<DateTimeValidationError>
+    ) => {
+        if (!context.validationError && val) {
+            setDate(new NanoDate(val.toDate()))
+        }
+    }
+
+    const setDateFromInput = () => {
+        if (!inputText) {
+            return
+        }
+
+        const value = Number(inputText)
+        const milli = convertToEpochMilli(value, unit)
+        setDate(new NanoDate(milli))
+    }
+
     const changeUnit = (_: MouseEvent<HTMLElement>, newUnit: string,) => {
         if (!newUnit || !inputText) {
             return
@@ -33,19 +55,16 @@ function EpochConverter() {
         setInputText(newValue.toString())
     }
 
-    const setDateFromInput = () => {
-        if (!inputText) {
-            return
-        }
-
-        const value = Number(inputText)
-        const milli = convertToEpochMilli(value, unit)
-        setDate(new NanoDate(milli))
-    }
-
     return (
         <div className='EpochConverter'>
-            <DateTime date={date}></DateTime>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                    views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
+                    minDate={dayjs(0)}
+                    value={dayjs(date)}
+                    onChange={onDateTimePickerChange}
+                ></DateTimePicker>
+            </LocalizationProvider>
             <Epoch date={date}></Epoch>
             <div className='EpochPanel'>
                 <div className='EpochForm'>
@@ -59,7 +78,7 @@ function EpochConverter() {
                         className='EpochForm-button'
                         variant='contained'
                         onClick={setDateFromInput}
-                    >Change</Button>
+                    >Apply</Button>
                 </div>
                 <div className='EpochUnit'>
                     <ToggleButtonGroup

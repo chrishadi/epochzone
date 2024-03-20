@@ -2471,7 +2471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/base@npm:5.0.0-beta.39":
+"@mui/base@npm:5.0.0-beta.39, @mui/base@npm:^5.0.0-beta.22":
   version: 5.0.0-beta.39
   resolution: "@mui/base@npm:5.0.0-beta.39"
   dependencies:
@@ -2627,7 +2627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/utils@npm:^5.15.13":
+"@mui/utils@npm:^5.14.16, @mui/utils@npm:^5.15.13":
   version: 5.15.13
   resolution: "@mui/utils@npm:5.15.13"
   dependencies:
@@ -2642,6 +2642,54 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/a001cc55833d1df0acfab4c3ec9fdb7c94012000c91ab23ae09745ead381faeef7c845f454ed4d6f5dc472604939158d9ee273ce5fb60f981a13f06233022c00
+  languageName: node
+  linkType: hard
+
+"@mui/x-date-pickers@npm:^6.19.7":
+  version: 6.19.7
+  resolution: "@mui/x-date-pickers@npm:6.19.7"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.2"
+    "@mui/base": "npm:^5.0.0-beta.22"
+    "@mui/utils": "npm:^5.14.16"
+    "@types/react-transition-group": "npm:^4.4.8"
+    clsx: "npm:^2.0.0"
+    prop-types: "npm:^15.8.1"
+    react-transition-group: "npm:^4.4.5"
+  peerDependencies:
+    "@emotion/react": ^11.9.0
+    "@emotion/styled": ^11.8.1
+    "@mui/material": ^5.8.6
+    "@mui/system": ^5.8.0
+    date-fns: ^2.25.0 || ^3.2.0
+    date-fns-jalali: ^2.13.0-0
+    dayjs: ^1.10.7
+    luxon: ^3.0.2
+    moment: ^2.29.4
+    moment-hijri: ^2.1.2
+    moment-jalaali: ^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/react":
+      optional: true
+    "@emotion/styled":
+      optional: true
+    date-fns:
+      optional: true
+    date-fns-jalali:
+      optional: true
+    dayjs:
+      optional: true
+    luxon:
+      optional: true
+    moment:
+      optional: true
+    moment-hijri:
+      optional: true
+    moment-jalaali:
+      optional: true
+  checksum: 10c0/2017b7f08ad7221233ee15557c64d54a514f5cb6694ead7571eade076ca15d92fc200866f9a2f9201f453139d907a35298ae1146138f1b969ce52d589b95ddfb
   languageName: node
   linkType: hard
 
@@ -3393,7 +3441,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-transition-group@npm:^4.4.10":
+"@types/react-transition-group@npm:^4.4.10, @types/react-transition-group@npm:^4.4.8":
   version: 4.4.10
   resolution: "@types/react-transition-group@npm:4.4.10"
   dependencies:
@@ -4950,7 +4998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.1.0":
+"clsx@npm:^2.0.0, clsx@npm:^2.1.0":
   version: 2.1.0
   resolution: "clsx@npm:2.1.0"
   checksum: 10c0/c09c00ad14f638366ca814097e6cab533dfa1972a358da5b557be487168acbb25b4c1395e89ffa842a8a61ba87a462d2b4885bc9d4f8410b598f3cb339599cdb
@@ -5584,6 +5632,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.10":
+  version: 1.11.10
+  resolution: "dayjs@npm:1.11.10"
+  checksum: 10c0/4de9af50639d47df87f2e15fa36bb07e0f9ed1e9c52c6caa1482788ee9a384d668f1dbd00c54f82aaab163db07d61d2899384b8254da3a9184fc6deca080e2fe
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9, debug@npm:^2.6.0":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -6080,6 +6135,7 @@ __metadata:
     "@fontsource/roboto": "npm:^5.0.12"
     "@mui/icons-material": "npm:^5.15.13"
     "@mui/material": "npm:^5.15.13"
+    "@mui/x-date-pickers": "npm:^6.19.7"
     "@testing-library/jest-dom": "npm:^5.17.0"
     "@testing-library/react": "npm:^13.4.0"
     "@testing-library/user-event": "npm:^13.5.0"
@@ -6087,6 +6143,7 @@ __metadata:
     "@types/node": "npm:^16.18.87"
     "@types/react": "npm:^18.2.64"
     "@types/react-dom": "npm:^18.2.21"
+    dayjs: "npm:^1.11.10"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-scripts: "npm:5.0.1"

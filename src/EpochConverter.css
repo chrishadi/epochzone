@@ -1,5 +1,9 @@
 .EpochConverter {
     padding: 1em;
+
+    &>.MuiFormControl-root {
+        min-width: 14em;
+    }
 }
 
 .EpochPanel {
