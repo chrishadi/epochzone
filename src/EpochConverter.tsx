@@ -6,27 +6,27 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Epoch from "./Epoch";
 import NanoDate from "./NanoDate";
-import { convertToEpochMilli } from "./conversion";
+import { convertEpochMilliToTick, convertTickToEpochMilli } from "./conversion";
 import './EpochConverter.css'
-
-const unitFactor: Record<string, number> = {
-    'second': 1_000_000_000,
-    'milli': 1_000_000,
-    'micro': 1_000,
-    'nano': 1
-}
 
 function EpochConverter() {
     const [date, setDate] = useState(new NanoDate())
     const [unit, setUnit] = useState('second')
     const [inputText, setInputText] = useState(date.getUnixSecond().toString())
+    const [isDirty, setIsDirty] = useState(false)
 
     const onDateTimePickerChange = (
         val: dayjs.Dayjs | null,
         context: PickerChangeHandlerContext<DateTimeValidationError>
     ) => {
         if (!context.validationError && val) {
-            setDate(new NanoDate(val.toDate()))
+            const date = new NanoDate(val.toDate())
+            setDate(date)
+
+            if (!isDirty) {
+                const tick = convertEpochMilliToTick(date.getTime(), unit)
+                setInputText(tick.toString())
+            }
         }
     }
 
@@ -37,24 +37,28 @@ function EpochConverter() {
             return
         }
 
-        const value = Number(inputText)
-        const milli = convertToEpochMilli(value, unit)
+        const tick = Number(inputText)
+        const milli = convertTickToEpochMilli(tick, unit)
         setDate(new NanoDate(milli))
+        setIsDirty(false)
+    }
+
+    const onTickInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+        setInputText(evt.target.value)
+        setIsDirty(true)
     }
 
     const changeUnit = (_: MouseEvent<HTMLElement>, newUnit: string,) => {
-        if (!newUnit || !inputText) {
+        if (!newUnit) {
             return
         }
 
         setUnit(newUnit)
 
-        const value = Number(inputText)
-        const milli = convertToEpochMilli(value, unit)
-        setDate(new NanoDate(milli))
-
-        const newValue = Math.trunc(milli * unitFactor['milli'] / unitFactor[newUnit])
-        setInputText(newValue.toString())
+        if (!isDirty) {
+            const newTick = convertEpochMilliToTick(date.getTime(), newUnit)
+            setInputText(newTick.toString())
+        }
     }
 
     return (
@@ -75,13 +79,12 @@ function EpochConverter() {
                         type='number'
                         name='tick'
                         value={inputText}
-                        onChange={(evt: ChangeEvent<HTMLInputElement>) => { setInputText(evt.target.value) }}
+                        onChange={onTickInputChange}
                     ></TextField>
                     <Button
                         className='EpochForm-button'
                         type='submit'
                         variant='contained'
-                        onClick={setDateFromInput}
                     >Apply</Button>
                 </form>
                 <div className='EpochUnit'>
